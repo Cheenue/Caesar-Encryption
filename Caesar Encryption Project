@@ -1,0 +1,45 @@
+
+FIRST_CHAR_CODE = ord("A")
+LAST_CHAR_CODE = ord("Z")
+    #NOTE when it's written in all caps, it indicates to the reader that it is a constant variable.
+CHAR_RANGE = LAST_CHAR_CODE - FIRST_CHAR_CODE + 1
+    #NOTE We added 1 because it counts 0 as a number counter
+
+
+def caesar_shift(message, shift):
+    #NOTE def stands for define
+    
+
+    #NOTE Result placeholder.
+    result = ""
+
+    #NOTE Go through each of the letters in the message.
+    for char in message.upper():
+        if char.isalpha():
+
+            #Convert character to the ASCII code.
+            char_code = ord(char)
+                                        #NOTE ord(x) returns the number representing the unicode code of a specified character
+                                            #NOTE unicode is BASICALLY a number representing a letter from a book. 
+                                                #NOTE If I wrote the letter A the unicode number would be 65. It's saying that A was on page 65 of the book and that's where it found it.
+            new_char_code = char_code + shift
+
+            if new_char_code > LAST_CHAR_CODE:
+                new_char_code -= CHAR_RANGE
+
+            if new_char_code < FIRST_CHAR_CODE:
+                new_char_code += CHAR_RANGE    
+
+            new_char = chr(new_char_code)
+            result += new_char
+                                        #NOTE if I put this "print(result)" here it will print out in incremental characters to make the encryption since it is in the scope but if I take it OUT of the scope it will only print the final encryption
+        else:
+            result = result + char                            
+    print(result)    
+
+user_message = input("Message to Encrypt: ")
+user_shift_key = int(input("Shift Key (integer): "))
+    #NOTE make sure to put int before input in user_shift_key because user_shift_key will automatically become a string. Adding the int will make it an integer
+        #NOTE otherwise the argument will be (int + string) and you can't add an int with a string.
+
+caesar_shift(user_message, user_shift_key)
